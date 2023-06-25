@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     },
     buttonPressed: { //4 ios ripple effect
         opacity: 0.5,
-        backgroundColor: 'rgba(0,0,0,0.1)', //simulates android ripple 'ok'
+        backgroundColor: 'rgba(0,0,0,0.3)', //simulates android ripple 'ok'
     },
     innerContainer: {
         flex: 1,
