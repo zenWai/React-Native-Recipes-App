@@ -4,18 +4,38 @@ import CategoriesScreen from "./screens/CategoriesScreen";
 import {NavigationContainer} from "@react-navigation/native";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import MealsOverviewScreen from "./screens/MealsOverviewScreen";
+import {CATEGORIES} from "./data/dummy-data";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-    /* StatusBar use - background app color is set on app.json*/
     return (
         <>
-            <StatusBar style="dark"/>
+            <StatusBar style="light"/>
             <NavigationContainer>
-                <Stack.Navigator>
-                    <Stack.Screen name="Categories" component={CategoriesScreen}/>
-                    <Stack.Screen name="MealsOverview" component={MealsOverviewScreen}/>
+                <Stack.Navigator screenOptions={{
+                    headerStyle: { backgroundColor: '#4e0101' },
+                    headerTintColor: 'white',
+                    contentStyle: {backgroundColor: '#690000'},
+                }}>
+                    <Stack.Screen
+                        name="Categories"
+                        component={CategoriesScreen}
+                        options={{
+                            title: 'Meal Categories',
+                        }}
+                    />
+                    <Stack.Screen
+                        name="MealsOverview"
+                        component={MealsOverviewScreen}
+                        options={({route, navigation}) => {
+                            const categoryChosenId = route.params.categoryPressed;
+                            const categoryName = CATEGORIES.find(category => category.id === categoryChosenId).title;
+                            return {
+                                title: categoryName,
+                            };
+                        }}
+                    />
                 </Stack.Navigator>
             </NavigationContainer>
         </>
